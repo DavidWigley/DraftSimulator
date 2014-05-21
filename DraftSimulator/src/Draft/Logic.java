@@ -1,11 +1,11 @@
 package Draft;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
 public class Logic {
  
 	private int month, day, year;
+	
 	public Logic() {
 		
 	}
@@ -14,14 +14,14 @@ public class Logic {
 		int year = -1;
 		boolean done = false;
 		while (!done) {
-			String choice = JOptionPane.showInputDialog(null, "Enter a month. Please use numbers IE: Jan = 1, Feb = 2, etc");
+			String choice = JOptionPane.showInputDialog(null, "Enter a year. Above 1900");
 			try	{
 				year = Integer.parseInt(choice);
 			} catch (NumberFormatException nfe) {
 				year = -1;
 			}
 			if (year <= 1900) {
-				JOptionPane.showMessageDialog(null, "You did not enter a valid number for the month");
+				JOptionPane.showMessageDialog(null, "You did not enter a valid number for the year. ");
 			}else {
 				done = true;
 			}
@@ -54,6 +54,7 @@ public class Logic {
 	public int DayInput() {
 		boolean done = false;
 		int day = -1;
+		boolean flag = true;
 		while (!done) {
 			String choice = JOptionPane.showInputDialog(null, "Enter the day");
 			try	{
@@ -61,13 +62,23 @@ public class Logic {
 			} catch (NumberFormatException nfe) {
 				day = -1;
 			}
+			if (day > 0 && day <32) {
+				flag = ValidDay(day, month);
+				if (!flag) {
+					JOptionPane.showMessageDialog(null, "The month you entered does not have that day");
+				}else {
+					done = true;
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "The day you entered is not in the valid range");
+			}
 			
 		}
 		
 		return day;
 	}
 	
-	public boolean IsLeapYear() {
+	public boolean IsLeapYear(int year) {
 		boolean leapYear = false;;
 		if (year % 4 == 0) {
 			leapYear = true;
@@ -98,7 +109,7 @@ public class Logic {
 		}
 		//feb
 		else {
-			if (IsLeapYear()) {
+			if (IsLeapYear(year)) {
 				if (day <= 29) {
 					valid = true;
 				}
