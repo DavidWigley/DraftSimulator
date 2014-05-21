@@ -261,7 +261,12 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 
 	public void mouseReleased(MouseEvent arg0) {}
 
-	public void keyPressed(KeyEvent arg0) {}
+	//closes the app
+	public void keyPressed(KeyEvent key) {
+		if (key.getKeyCode() == key.VK_ESCAPE){
+			System.exit(0);
+		}
+	}
 
 	public void keyReleased(KeyEvent arg0) {}
 
