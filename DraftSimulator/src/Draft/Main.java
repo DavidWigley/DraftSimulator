@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class Main extends Canvas implements Runnable, KeyListener,MouseListener, MouseMotionListener{
@@ -63,6 +64,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 		yLine = height / NUM_ROW;
 		bf =  frame.getBufferStrategy();
 		
+		//adding 1 - 366 to the array
 		for (int i = 1; i < 367; i++) {
 			availableNums.add(i);
 		}
@@ -77,8 +79,12 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 		while (running) {
 			if (gameState == 1) {
 				if (begin) {
+					//gets year and if its a leap year
 					year = logic.YearInput();
 					currentlyLeapYear = logic.IsLeapYear(year);
+					//randomly generate a draft #
+					int choice = generator.nextInt(61);
+					JOptionPane.showMessageDialog(null, "Anyone with a number below " + (140 + choice) + " gets drafted");
 					gameState =2;
 				}
 				paint();
@@ -91,7 +97,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 				}
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(400);
 			} catch (InterruptedException e) {
 				
 			}
@@ -99,10 +105,8 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 	}
 	
 	public void DrawNums() {
-		System.out.println("Drew these "+ availableNums);
 		int count = 0;
 		int num;
-		System.out.println("Running draw nums");
 		if (currentlyLeapYear) {
 			pickedNums = new Integer[366];
 			while (availableNums.size() != 0) {
@@ -132,9 +136,6 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 				count++;
 			}
 			initDrawing = true;
-		}
-		for (int i = 0; i < pickedNums.length; i++) {
-			System.out.println(pickedNums[i] +  "  " + i);
 		}
 	}
 	
@@ -175,7 +176,6 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 						}
 					}
 					for (int row = 1; row <= rowNum; row++) {
-//						System.out.println(count + "col Num: " + col + "row Num: " + row);
 						currentNum = Integer.toString(pickedNums[count]);
 						g.drawString(currentNum, xLine * col + 55, yLine * row + 20);
 						count++;
@@ -186,6 +186,36 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 				for (int i = 1 ; i < NUM_ROW; i++) {
 					currentNum = Integer.toString(i);
 					g.drawString(currentNum, 55, yLine * i + 20);
+				}
+				
+				for (int i = 1; i < NUM_COL; i++) {
+					String choice = null;
+					if (i ==1) {
+						choice = "January";
+					}else if (i == 2) {
+						choice = "February";
+					}else if (i == 3) {
+						choice = "March";
+					}else if (i == 4) {
+						choice = "April";
+					}else if (i == 5){
+						choice = "May";
+					}else if (i == 6) {
+						choice = "June";
+					}else if (i == 7) {
+						choice = "July";
+					}else if (i == 8) {
+						choice = "August";
+					}else if (i == 9){
+						choice = "September";
+					}else if (i == 10){
+						choice = "October";
+					}else if (i == 11) {
+						choice = "November";
+					}else {
+						choice = "December";
+					}
+					g.drawString(choice, xLine * i + 30,20);
 				}
 			}else {
 				g.drawString("Made by David Wigley", 5, height - 5);
