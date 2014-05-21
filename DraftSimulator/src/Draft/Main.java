@@ -1,5 +1,6 @@
 package Draft;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -44,6 +45,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 	Integer[] pickedNums;
 	int year;
 	boolean currentlyLeapYear = false;
+	int draftNum;
 	
 	public Main() {
 		width = (int) screenSize.getWidth();
@@ -84,7 +86,8 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 					currentlyLeapYear = logic.IsLeapYear(year);
 					//randomly generate a draft #
 					int choice = generator.nextInt(61);
-					JOptionPane.showMessageDialog(null, "Anyone with a number below " + (140 + choice) + " gets drafted");
+					draftNum = 140 + choice;
+					JOptionPane.showMessageDialog(null, "Anyone with a number below " + draftNum + " gets drafted");
 					gameState =2;
 				}
 				paint();
@@ -103,7 +106,9 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 			}
 		}
 	}
-	
+	/**
+	 * Method that randomly draws the numbers and assigns them to tiles. Takes leap year into account
+	 */
 	public void DrawNums() {
 		int count = 0;
 		int num;
@@ -187,7 +192,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 					currentNum = Integer.toString(i);
 					g.drawString(currentNum, 55, yLine * i + 20);
 				}
-				
+				//draws month names in
 				for (int i = 1; i < NUM_COL; i++) {
 					String choice = null;
 					if (i ==1) {
@@ -217,6 +222,11 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 					}
 					g.drawString(choice, xLine * i + 30,20);
 				}
+				String number = Integer.toString(draftNum);
+				g.setColor(Color.red);
+				g.drawString(number, 40, 20);
+				g.setColor(Color.yellow);
+				g.drawRect(35, 5, 30, 25);
 			}else {
 				g.drawString("Made by David Wigley", 5, height - 5);
 				g.drawImage(playButton, 0, 0, playButton.getWidth(this) *2 , playButton.getHeight(this) * 2, this);
@@ -229,18 +239,11 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 	}
 	public void mouseDragged(MouseEvent arg0) {}
 
-	public void mouseMoved(MouseEvent arg0) {
-		
-	}
+	public void mouseMoved(MouseEvent arg0) {}
 
-	public void mouseClicked(MouseEvent arg0) {
-		
-	}
+	public void mouseClicked(MouseEvent arg0) {}
 
-	public void mouseEntered(MouseEvent arg0) {
-
-		
-	}
+	public void mouseEntered(MouseEvent arg0) {}
 
 	public void mouseExited(MouseEvent arg0) {
 
@@ -256,29 +259,14 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 		
 	}
 
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent arg0) {}
 
-		
-	}
+	public void keyPressed(KeyEvent arg0) {}
 
-	public void keyPressed(KeyEvent arg0) {
-		
-		
-	}
+	public void keyReleased(KeyEvent arg0) {}
 
-	public void keyReleased(KeyEvent arg0) {
+	public void keyTyped(KeyEvent arg0) {}
 
-		
-	}
-
-	public void keyTyped(KeyEvent arg0) {
-
-		
-	}
-
-	public void run() {
-
-		
-	}
+	public void run() {}
 
 }

@@ -6,10 +6,15 @@ public class Logic {
  
 	private int month, day, year;
 	
-	public Logic() {
-		
+	public void getAllInputs() {
+		DayInput();
+		MonthInput();
+		YearInput();
 	}
-	
+	/**
+	 * Gets the year from the user
+	 * @return years
+	 */
 	public int YearInput() {
 		int year = -1;
 		boolean done = false;
@@ -30,6 +35,10 @@ public class Logic {
 		return year;
 	}
 	
+	/**
+	 * Gets the month from the user
+	 * @return month
+	 */
 	public int MonthInput() {
 		int month = -1;
 		boolean done = false;
@@ -51,6 +60,10 @@ public class Logic {
 		
 	}
 	
+	/**
+	 * Gets day from the user and finds out if it is on a leap year
+	 * @return day
+	 */
 	public int DayInput() {
 		boolean done = false;
 		int day = -1;
