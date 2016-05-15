@@ -46,6 +46,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 	int year;
 	boolean currentlyLeapYear = false;
 	int draftNum;
+	private Color green;
 	
 	public Main() {
 		width = (int) screenSize.getWidth();
@@ -87,7 +88,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 					//randomly generate a draft #
 					int choice = generator.nextInt(61);
 					draftNum = 140 + choice;
-					JOptionPane.showMessageDialog(null, "Anyone with a number below " + draftNum + " gets drafted");
+					JOptionPane.showMessageDialog(null, "Anyone with a number below " + draftNum + " gets drafted. Red is drafted, green is undrafted.");
 					gameState =2;
 				}
 				paint();
@@ -181,17 +182,28 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 						}
 					}
 					for (int row = 1; row <= rowNum; row++) {
+						System.out.println("The draft num is: " + draftNum);
+						System.out.println("The currentNum is: " + pickedNums[count]);
+						if (pickedNums[count] <= draftNum) {
+							g.setColor(Color.RED);
+						}else {
+							green = new Color(0,139,69);
+							g.setColor(green);
+						}
 						currentNum = Integer.toString(pickedNums[count]);
 						g.drawString(currentNum, xLine * col + 55, yLine * row + 20);
 						count++;
 					}
 				}
+				g.setColor(Color.BLACK);
 				
 				//draws nums for days
 				for (int i = 1 ; i < NUM_ROW; i++) {
+					//setting color to red, to show drafted
 					currentNum = Integer.toString(i);
 					g.drawString(currentNum, 55, yLine * i + 20);
 				}
+
 				//draws month names in
 				for (int i = 1; i < NUM_COL; i++) {
 					String choice = null;
