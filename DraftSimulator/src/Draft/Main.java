@@ -13,7 +13,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -37,7 +36,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 	Graphics g;
 	BufferStrategy bf;
 	int xLine = 0, yLine = 0;
-	private static final int NUM_COL = 13, NUM_ROW = 32;
+	private static final int NUM_COL = 13, NUM_ROW = 31;
 	int gameState = 1;
 	boolean begin = false;
 	boolean initDrawing = false;
@@ -198,7 +197,7 @@ public class Main extends Canvas implements Runnable, KeyListener,MouseListener,
 				g.setColor(Color.BLACK);
 				
 				//draws nums for days
-				for (int i = 1 ; i < NUM_ROW; i++) {
+				for (int i = 1 ; i <= NUM_ROW; i++) {
 					//setting color to red, to show drafted
 					currentNum = Integer.toString(i);
 					g.drawString(currentNum, 55, yLine * i + 20);
